@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TRANSMISSION LOST // a retro narrative puzzle horror game</title>
+  <meta name="description" content="A retro narrative puzzle horror game. Decode the signal. Solve what is left behind. Play the demo on itch.io." />
+
+  <!-- Open Graph / social cards -->
+  <meta property="og:title" content="TRANSMISSION LOST" />
+  <meta property="og:description" content="A retro narrative puzzle horror game. Decode the signal. Play the demo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/og-cover.png" />
+  <meta name="theme-color" content="#040806" />
+
+  <link rel="preconnect" href="https://picsum.photos" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- CRT screen effects: scanlines, vignette, flicker. Decorative, never interactive. -->
+  <div class="crt" aria-hidden="true">
+    <div class="crt__scanlines"></div>
+    <div class="crt__vignette"></div>
+    <div class="crt__flicker"></div>
+  </div>
+
+  <!-- BOOT OVERLAY: types a short POST sequence, then dismisses to reveal the hero. -->
+  <div class="boot" id="boot" role="dialog" aria-label="System boot sequence">
+    <pre class="boot__log" id="bootLog"></pre>
+    <button class="boot__skip" id="bootSkip" type="button">press any key to continue_</button>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top">TRANSMISSION&nbsp;LOST</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#signal">signal</a>
+      <a href="#features">features</a>
+      <a href="#gallery">stills</a>
+      <a class="nav__cta" href="https://itch.io/" data-itch>play demo</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <p class="hero__sys" id="heroSys">// signal acquired :: source unknown</p>
+      <h1 class="hero__title glitch" data-text="TRANSMISSION LOST">TRANSMISSION LOST</h1>
+      <p class="hero__tag">A retro narrative puzzle horror game. Decode the signal. Solve what it left behind.</p>
+      <div class="hero__actions">
+        <a class="btn btn--solid" href="https://itch.io/" data-itch>
+          <span class="btn__prompt">&gt;</span> ./play_demo.sh
+        </a>
+        <a class="btn btn--ghost" href="#signal">read transmission</a>
+      </div>
+    </section>
+
+    <!-- ============ SIGNAL / STORY ============ -->
+    <section class="signal" id="signal">
+      <div class="signal__frame">
+        <div class="signal__bar">
+          <span class="signal__dot"></span>
+          <span>RECOVERED_LOG // 03:47:12 // integrity 41%</span>
+        </div>
+        <div class="signal__body" id="signalBody">
+          <p>The last message came through at night, broken into static and silence.</p>
+          <p>You answer it. The screen remembers things you do not. Every room you decode asks a question back, and the answers were never meant to be read aloud.</p>
+          <p>Find out who was transmitting. Find out why they stopped. <span class="signal__corrupt" data-corrupt="d0 n0t l00k away">do not look away</span>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="features" id="features">
+      <h2 class="section-head"><span class="section-head__cmd">&gt; cat</span> features.txt</h2>
+      <ul class="features__list">
+        <li class="feat">
+          <span class="feat__key">[01]</span>
+          <div>
+            <h3>Branching narrative</h3>
+            <p>Every decoded fragment rewrites what you thought you knew. Choices stay with the machine.</p>
+          </div>
+        </li>
+        <li class="feat">
+          <span class="feat__key">[02]</span>
+          <div>
+            <h3>Terminal puzzles</h3>
+            <p>Crack ciphers, repair corrupted files, and coax answers out of a system that does not want to give them.</p>
+          </div>
+        </li>
+        <li class="feat">
+          <span class="feat__key">[03]</span>
+          <div>
+            <h3>Atmospheric dread</h3>
+            <p>No jump-scare spam. A slow phosphor hum, failing hardware, and the sense that you are not alone on the line.</p>
+          </div>
+        </li>
+        <li class="feat">
+          <span class="feat__key">[04]</span>
+          <div>
+            <h3>Authentic CRT</h3>
+            <p>Scanlines, bloom, and green-on-black built for the era the story is trapped in.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ GALLERY ============ -->
+    <!-- TODO(assets): swap the picsum placeholder srcs for real screenshots in /assets.
+         Keep the same aspect ratios (16:10 large, 4:3 small) for the layout to hold. -->
+    <section class="gallery" id="gallery">
+      <h2 class="section-head"><span class="section-head__cmd">&gt; ls</span> /stills</h2>
+      <div class="gallery__grid">
+        <figure class="shot shot--lg">
+          <img src="https://picsum.photos/seed/transmission-room/1280/800" alt="In-game screenshot: a decoded room rendered on a CRT terminal" loading="lazy" width="1280" height="800" />
+          <figcaption>chapter_01 // the empty room</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="https://picsum.photos/seed/transmission-cipher/800/600" alt="In-game screenshot: a cipher puzzle on screen" loading="lazy" width="800" height="600" />
+          <figcaption>puzzle // cipher</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="https://picsum.photos/seed/transmission-static/800/600" alt="In-game screenshot: corrupted static and a recovered message" loading="lazy" width="800" height="600" />
+          <figcaption>log // static</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="https://picsum.photos/seed/transmission-hall/800/600" alt="In-game screenshot: a dim corridor" loading="lazy" width="800" height="600" />
+          <figcaption>chapter_02 // the corridor</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ TYPEABLE TERMINAL ============ -->
+    <section class="console" id="console">
+      <h2 class="section-head"><span class="section-head__cmd">&gt;</span> still here?</h2>
+      <p class="console__hint">This terminal accepts input. Type <code>help</code> and press enter.</p>
+      <div class="console__window" id="consoleWindow">
+        <div class="console__bar">
+          <span>guest@transmission ~ %</span>
+        </div>
+        <div class="console__output" id="consoleOutput" aria-live="polite"></div>
+        <form class="console__form" id="consoleForm" autocomplete="off">
+          <label class="console__prompt" for="consoleInput">guest@transmission:~$</label>
+          <input class="console__input" id="consoleInput" name="cmd" type="text"
+                 spellcheck="false" autocapitalize="off" aria-label="terminal command" />
+          <span class="console__cursor" aria-hidden="true">█</span>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER CTA ============ -->
+  <footer class="foot" id="foot">
+    <h2 class="foot__title">The signal is still open.</h2>
+    <a class="btn btn--solid btn--big" href="https://itch.io/" data-itch>
+      <span class="btn__prompt">&gt;</span> download the demo on itch.io
+    </a>
+    <nav class="foot__social" aria-label="Social links">
+      <!-- TODO(links): replace href="#" with your real Discord / X / press-kit URLs, or delete unused ones. -->
+      <a href="#" data-social>discord</a>
+      <a href="#" data-social>x / twitter</a>
+      <a href="#" data-social>press kit</a>
+    </nav>
+    <p class="foot__fine">TRANSMISSION LOST &middot; a retro narrative puzzle horror game</p>
+  </footer>
+
+  <!-- Lightbox for gallery stills -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" id="lightboxClose" type="button" aria-label="Close">close [x]</button>
+    <img class="lightbox__img" id="lightboxImg" src="" alt="" />
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
