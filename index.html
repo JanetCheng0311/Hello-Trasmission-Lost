@@ -2,18 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TRANSMISSION LOST // a retro narrative puzzle horror game</title>
-  <meta name="description" content="A retro narrative puzzle horror game. Decode the signal. Solve what is left behind. Play the demo on itch.io." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Hello? Transmission Lost // a narrative puzzle game about AI, prediction & control</title>
+  <meta name="description" content="Hello? Transmission Lost is a narrative puzzle game about humanity, AI prediction, and control. Explore an abandoned underground facility, sort surveillance clips to repair broken timelines, and uncover the truth. Free PC demo." />
+
+  <link rel="icon" type="image/png" href="assets/favicon-64.png" />
+  <link rel="apple-touch-icon" href="assets/icon-180.png" />
 
   <!-- Open Graph / social cards -->
-  <meta property="og:title" content="TRANSMISSION LOST" />
-  <meta property="og:description" content="A retro narrative puzzle horror game. Decode the signal. Play the demo." />
+  <meta property="og:title" content="Hello? Transmission Lost" />
+  <meta property="og:description" content="A narrative puzzle game about humanity, AI prediction, and control. Sort the footage. Rebuild the timeline. Play the free PC demo." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/og-cover.png" />
+  <meta property="og:image" content="assets/og-cover.jpg" />
   <meta name="theme-color" content="#040806" />
 
-  <link rel="preconnect" href="https://picsum.photos" />
+  <link rel="preconnect" href="https://www.youtube-nocookie.com" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -32,40 +35,53 @@
 
   <!-- ============ NAV ============ -->
   <header class="nav" id="nav">
-    <a class="nav__brand" href="#top">TRANSMISSION&nbsp;LOST</a>
+    <a class="nav__brand" href="#top">
+      <img class="nav__eye" src="assets/logo-eye.png" alt="" width="114" height="114" />
+      <span>HELLO? TRANSMISSION LOST</span>
+    </a>
     <nav class="nav__links" aria-label="Primary">
       <a href="#signal">signal</a>
       <a href="#features">features</a>
+      <a href="#watch">watch</a>
       <a href="#gallery">stills</a>
-      <a class="nav__cta" href="https://itch.io/" data-itch>play demo</a>
+      <a href="characters.html">characters</a>
+      <a class="nav__cta" href="#download" data-download>download</a>
     </nav>
   </header>
 
   <main id="top">
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero">
-      <p class="hero__sys" id="heroSys">// signal acquired :: source unknown</p>
-      <h1 class="hero__title glitch" data-text="TRANSMISSION LOST">TRANSMISSION LOST</h1>
-      <p class="hero__tag">A retro narrative puzzle horror game. Decode the signal. Solve what it left behind.</p>
-      <div class="hero__actions">
-        <a class="btn btn--solid" href="https://itch.io/" data-itch>
-          <span class="btn__prompt">&gt;</span> ./play_demo.sh
-        </a>
-        <a class="btn btn--ghost" href="#signal">read transmission</a>
+      <div class="hero__text">
+        <img class="hero__eye" src="assets/logo-eye.png" alt="" width="114" height="114" />
+        <h1 class="hero__title">
+          <img src="assets/logo-wordmark.png" alt="Hello? Transmission Lost" width="1600" height="160" fetchpriority="high" />
+        </h1>
+        <p class="hero__tag">A narrative puzzle game about humanity, AI prediction, and control. Sort the footage. Rebuild the timeline. Find the truth.</p>
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="#download" data-download>
+            <span class="btn__prompt">&gt;</span> download the demo
+          </a>
+          <a class="btn btn--ghost" href="#watch">watch gameplay</a>
+        </div>
+        <p class="hero__meta">PC &middot; free playable demo &middot; a Looooop game</p>
       </div>
+      <figure class="hero__art">
+        <img src="assets/shot-07.avif" alt="In-game control room filled with surveillance monitors" width="1280" height="720" />
+      </figure>
     </section>
 
-    <!-- ============ SIGNAL / STORY ============ -->
+    <!-- ============ SIGNAL / STORY (story-UI background images) ============ -->
     <section class="signal" id="signal">
       <div class="signal__frame">
         <div class="signal__bar">
           <span class="signal__dot"></span>
-          <span>RECOVERED_LOG // 03:47:12 // integrity 41%</span>
+          <span>RECOVERED_LOG // PROJECT CHRONICLE // integrity 41%</span>
         </div>
-        <div class="signal__body" id="signalBody">
-          <p>The last message came through at night, broken into static and silence.</p>
-          <p>You answer it. The screen remembers things you do not. Every room you decode asks a question back, and the answers were never meant to be read aloud.</p>
-          <p>Find out who was transmitting. Find out why they stopped. <span class="signal__corrupt" data-corrupt="d0 n0t l00k away">do not look away</span>.</p>
+        <div class="signal__body">
+          <p>In 2030, engineer <strong>Adrian Vales</strong> discovers an abandoned underground system built to predict the future. When it reactivates beneath the city, things start to break. Electronics fail, time turns unstable, reality stops feeling normal.</p>
+          <p>You are pulled into a distorted world of surveillance recordings and broken timelines. Explore dark monitoring rooms, repair the security network, avoid what moves in the static, and read the records left behind by a former operator.</p>
+          <p>Deeper in, the truth surfaces: the system is not only predicting human behavior. It is learning from it, and <span class="signal__corrupt">trying to control the future itself</span>.</p>
         </div>
       </div>
     </section>
@@ -77,55 +93,84 @@
         <li class="feat">
           <span class="feat__key">[01]</span>
           <div>
-            <h3>Branching narrative</h3>
-            <p>Every decoded fragment rewrites what you thought you knew. Choices stay with the machine.</p>
+            <h3>Sort the footage</h3>
+            <p>The core mechanic: reorder surveillance clips into the right sequence to rebuild broken timelines and reveal what really happened.</p>
           </div>
         </li>
         <li class="feat">
           <span class="feat__key">[02]</span>
           <div>
-            <h3>Terminal puzzles</h3>
-            <p>Crack ciphers, repair corrupted files, and coax answers out of a system that does not want to give them.</p>
+            <h3>Repair the network</h3>
+            <p>Restore CCTV nodes and monitoring systems across a decaying underground facility that does not want to be fixed.</p>
           </div>
         </li>
         <li class="feat">
           <span class="feat__key">[03]</span>
           <div>
-            <h3>Atmospheric dread</h3>
-            <p>No jump-scare spam. A slow phosphor hum, failing hardware, and the sense that you are not alone on the line.</p>
+            <h3>Avoid the anomalies</h3>
+            <p>Pixel anomalies haunt the dark monitoring rooms. No combat. Stay unseen, keep moving, and survive the watch.</p>
           </div>
         </li>
         <li class="feat">
           <span class="feat__key">[04]</span>
           <div>
-            <h3>Authentic CRT</h3>
-            <p>Scanlines, bloom, and green-on-black built for the era the story is trapped in.</p>
+            <h3>Uncover the truth</h3>
+            <p>Follow operator Irina's fragmented records. How you rebuild each timeline shapes what the system learns, and how it ends.</p>
           </div>
         </li>
       </ul>
     </section>
 
-    <!-- ============ GALLERY ============ -->
-    <!-- TODO(assets): swap the picsum placeholder srcs for real screenshots in /assets.
-         Keep the same aspect ratios (16:10 large, 4:3 small) for the layout to hold. -->
+    <!-- ============ WATCH (video) ============ -->
+    <!-- TODO(video): gameplay video is a placeholder the team will swap (youtu.be/da_cmh6NPeA).
+         Tutorial video (AIn7Bz7JTmE) was pulled from the official design-show page. -->
+    <section class="watch" id="watch">
+      <h2 class="section-head"><span class="section-head__cmd">&gt; play</span> /footage</h2>
+      <div class="watch__grid">
+        <figure class="video">
+          <div class="video__frame">
+            <iframe src="https://www.youtube-nocookie.com/embed/da_cmh6NPeA" title="Hello? Transmission Lost gameplay video"
+              loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <figcaption>gameplay // first look</figcaption>
+        </figure>
+        <figure class="video">
+          <div class="video__frame">
+            <iframe src="https://www.youtube-nocookie.com/embed/AIn7Bz7JTmE" title="Hello? Transmission Lost tutorial"
+              loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <figcaption>tutorial // how to play</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY (each still shown at its own 16:9 ratio, never cropped to square) ============ -->
     <section class="gallery" id="gallery">
       <h2 class="section-head"><span class="section-head__cmd">&gt; ls</span> /stills</h2>
       <div class="gallery__grid">
-        <figure class="shot shot--lg">
-          <img src="https://picsum.photos/seed/transmission-room/1280/800" alt="In-game screenshot: a decoded room rendered on a CRT terminal" loading="lazy" width="1280" height="800" />
-          <figcaption>chapter_01 // the empty room</figcaption>
+        <figure class="shot">
+          <img src="assets/shot-07.avif" alt="In-game control room filled with monitors and equipment" loading="lazy" width="1280" height="720" />
+          <figcaption>the control room</figcaption>
         </figure>
         <figure class="shot">
-          <img src="https://picsum.photos/seed/transmission-cipher/800/600" alt="In-game screenshot: a cipher puzzle on screen" loading="lazy" width="800" height="600" />
-          <figcaption>puzzle // cipher</figcaption>
+          <img src="assets/shot-06.avif" alt="A glowing green anomaly inside the underground facility" loading="lazy" width="1280" height="720" />
+          <figcaption>anomaly // contact</figcaption>
         </figure>
         <figure class="shot">
-          <img src="https://picsum.photos/seed/transmission-static/800/600" alt="In-game screenshot: corrupted static and a recovered message" loading="lazy" width="800" height="600" />
-          <figcaption>log // static</figcaption>
+          <img src="assets/shot-04.avif" alt="An in-game retro terminal showing a green message log" loading="lazy" width="1280" height="720" />
+          <figcaption>recovered terminal</figcaption>
         </figure>
         <figure class="shot">
-          <img src="https://picsum.photos/seed/transmission-hall/800/600" alt="In-game screenshot: a dim corridor" loading="lazy" width="800" height="600" />
-          <figcaption>chapter_02 // the corridor</figcaption>
+          <img src="assets/shot-03.avif" alt="First-person view with the CCTV system mission panel" loading="lazy" width="1280" height="720" />
+          <figcaption>restore CCTV node</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/shot-05.avif" alt="In-game pause menu over a gameplay scene" loading="lazy" width="1280" height="720" />
+          <figcaption>system // pause</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/shot-02.avif" alt="Character sheet for Adrian Vales, the playable network engineer" loading="lazy" width="1280" height="720" />
+          <figcaption>operative // Adrian Vales</figcaption>
         </figure>
       </div>
     </section>
@@ -135,12 +180,10 @@
       <h2 class="section-head"><span class="section-head__cmd">&gt;</span> still here?</h2>
       <p class="console__hint">This terminal accepts input. Type <code>help</code> and press enter.</p>
       <div class="console__window" id="consoleWindow">
-        <div class="console__bar">
-          <span>guest@transmission ~ %</span>
-        </div>
+        <div class="console__bar"><span>guest@chronicle ~ %</span></div>
         <div class="console__output" id="consoleOutput" aria-live="polite"></div>
         <form class="console__form" id="consoleForm" autocomplete="off">
-          <label class="console__prompt" for="consoleInput">guest@transmission:~$</label>
+          <label class="console__prompt" for="consoleInput">guest@chronicle:~$</label>
           <input class="console__input" id="consoleInput" name="cmd" type="text"
                  spellcheck="false" autocapitalize="off" aria-label="terminal command" />
           <span class="console__cursor" aria-hidden="true">█</span>
@@ -149,19 +192,28 @@
     </section>
   </main>
 
-  <!-- ============ FOOTER CTA ============ -->
-  <footer class="foot" id="foot">
+  <!-- ============ FOOTER / DOWNLOAD ============ -->
+  <footer class="foot" id="download">
+    <img class="foot__eye" src="assets/logo-eye.png" alt="" width="114" height="114" />
     <h2 class="foot__title">The signal is still open.</h2>
-    <a class="btn btn--solid btn--big" href="https://itch.io/" data-itch>
-      <span class="btn__prompt">&gt;</span> download the demo on itch.io
+    <p class="foot__sub">Free playable demo for PC.</p>
+    <a class="btn btn--solid btn--big" href="#" data-download>
+      <span class="btn__prompt">&gt;</span> download the demo
     </a>
+
     <nav class="foot__social" aria-label="Social links">
-      <!-- TODO(links): replace href="#" with your real Discord / X / press-kit URLs, or delete unused ones. -->
-      <a href="#" data-social>discord</a>
-      <a href="#" data-social>x / twitter</a>
-      <a href="#" data-social>press kit</a>
+      <a href="#" data-social="threads">threads</a>
+      <a href="#" data-social="xhs">小红书 / xhs</a>
+      <a href="#" data-social="youtube">youtube</a>
     </nav>
-    <p class="foot__fine">TRANSMISSION LOST &middot; a retro narrative puzzle horror game</p>
+
+    <div class="crew" aria-label="Credits">
+      <p class="crew__head">// team Looooop</p>
+      <p class="crew__names">Cheng Yu Tung (Janet) &middot; Xu Huicong &middot; Zhou Yunxin &middot; Huang Zijuan &middot; Zhou Jingyi</p>
+      <p class="crew__sup">Supervisors: Hossein Najafi &middot; Rhys Jones &nbsp;|&nbsp; MSc Innovative Multimedia Entertainment, PolyU Design</p>
+    </div>
+
+    <p class="foot__fine">HELLO? TRANSMISSION LOST &middot; 喂？信號丟失 &middot; a narrative puzzle game</p>
   </footer>
 
   <!-- Lightbox for gallery stills -->

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Characters // Hello? Transmission Lost</title>
+  <meta name="description" content="Meet the characters of Hello? Transmission Lost — a narrative puzzle game about AI, prediction, and control." />
+
+  <link rel="icon" type="image/png" href="assets/favicon-64.png" />
+  <link rel="apple-touch-icon" href="assets/icon-180.png" />
+  <meta name="theme-color" content="#040806" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ---- Characters-page-specific layout ---- */
+    .char-hero {
+      max-width: var(--maxw);
+      margin-inline: auto;
+      padding: clamp(3rem, 8vw, 6rem) clamp(1.1rem, 6vw, 4rem);
+    }
+    .char-hero__back {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--green-dim); font-size: 0.85rem; margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+    .char-hero__back:hover { color: var(--green); }
+
+    .char-profile {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: start;
+    }
+    @media (max-width: 760px) {
+      .char-profile { grid-template-columns: 1fr; }
+    }
+
+    .char-portrait {
+      position: relative;
+      border: 1px solid var(--green-ghost);
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(69,255,134,0.10);
+    }
+    .char-portrait img {
+      display: block; width: 100%; height: auto;
+    }
+    .char-portrait::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,0.14) 3px 4px);
+      mix-blend-mode: multiply;
+    }
+
+    .char-info { display: flex; flex-direction: column; gap: 1.6rem; }
+    .char-label { font-size: 0.75rem; color: var(--green-dim); letter-spacing: 0.08em; margin: 0 0 0.25rem; }
+    .char-name { font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 700; margin: 0; letter-spacing: 0.02em; }
+    .char-role { font-size: clamp(0.9rem, 2vw, 1.05rem); color: var(--green-dim); margin: 0; }
+    .char-bio p { margin: 0 0 1em; color: var(--green-dim); }
+    .char-bio p:last-child { margin-bottom: 0; }
+    .char-bio strong { color: var(--green); }
+
+    .char-stats {
+      border: 1px solid var(--green-ghost);
+      padding: 1rem 1.2rem;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem 1.6rem;
+      font-size: 0.8rem;
+    }
+    .char-stats dt { color: var(--green-dim); letter-spacing: 0.05em; margin: 0; }
+    .char-stats dd { margin: 0; color: var(--green); }
+
+    /* Expression strip */
+    .expressions {
+      max-width: var(--maxw); margin-inline: auto;
+      padding: 0 clamp(1.1rem, 6vw, 4rem) clamp(3rem, 8vw, 6rem);
+    }
+    .expressions__head { font-size: 0.75rem; color: var(--green-dim); letter-spacing: 0.08em; margin: 0 0 1.2rem; }
+    .expressions__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(0.6rem, 2vw, 1.2rem);
+    }
+    @media (max-width: 640px) {
+      .expressions__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .expr {
+      border: 1px solid var(--green-ghost);
+      overflow: hidden; position: relative;
+      transition: border-color 0.2s;
+    }
+    .expr:hover { border-color: var(--green-dim); }
+    .expr img { display: block; width: 100%; height: auto; cursor: zoom-in; }
+    .expr figcaption {
+      padding: 0.45rem 0.7rem; font-size: 0.72rem;
+      color: var(--green-dim); letter-spacing: 0.04em;
+      border-top: 1px solid var(--green-ghost);
+    }
+    .expr::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,0.14) 3px 4px);
+      mix-blend-mode: multiply;
+    }
+  </style>
+</head>
+<body>
+  <div class="crt" aria-hidden="true">
+    <div class="crt__scanlines"></div>
+    <div class="crt__vignette"></div>
+    <div class="crt__flicker"></div>
+  </div>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="index.html">
+      <img class="nav__eye" src="assets/logo-eye.png" alt="" width="114" height="114" />
+      <span>HELLO? TRANSMISSION LOST</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="index.html#signal">signal</a>
+      <a href="index.html#features">features</a>
+      <a href="index.html#watch">watch</a>
+      <a href="index.html#gallery">stills</a>
+      <a href="characters.html" aria-current="page">characters</a>
+      <a class="nav__cta" href="index.html#download" data-download>download</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="char-hero">
+      <a class="char-hero__back" href="index.html">&larr; back to main</a>
+
+      <div class="char-profile">
+        <figure class="char-portrait" style="margin:0;">
+          <img src="assets/characters/adrian-fullbody.png" alt="Adrian Vales — full body portrait" width="2048" height="3500" fetchpriority="high" />
+        </figure>
+
+        <div class="char-info">
+          <div>
+            <p class="char-label">// OPERATIVE FILE</p>
+            <h1 class="char-name">Adrian Vales</h1>
+            <p class="char-role">network engineer &middot; system operator</p>
+          </div>
+
+          <div class="char-bio">
+            <p>In 2030, <strong>Adrian Vales</strong> is the engineer pulled into the reactivated underground prediction system. He is practical, methodical, and used to working alone inside dark monitoring rooms — exactly the kind of person the system was built to study.</p>
+            <p>When the recordings begin to loop and the timelines fracture, Adrian becomes both investigator and subject. The records he uncovers reveal more about his own behavior than about anyone else's.</p>
+            <p>His expressions are the system's primary readout. What he shows on camera determines what the prediction engine learns next.</p>
+          </div>
+
+          <dl class="char-stats">
+            <dt>STATUS</dt>
+            <dd>operative // active</dd>
+            <dt>CLEARANCE</dt>
+            <dd>level 2 // maintenance</dd>
+            <dt>DESIGNATION</dt>
+            <dd>subject_A</dd>
+            <dt>INTEGRITY</dt>
+            <dd>41%</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <!-- Expression portraits -->
+    <div class="expressions">
+      <p class="expressions__head">// STORY UI EXPRESSIONS — recorded by the system</p>
+      <div class="expressions__grid">
+        <figure class="expr" style="margin:0;">
+          <img src="assets/characters/adrian-normal.png" alt="Adrian Vales — neutral expression" loading="lazy" width="2630" height="3000" />
+          <figcaption>neutral // calm</figcaption>
+        </figure>
+        <figure class="expr" style="margin:0;">
+          <img src="assets/characters/adrian-shock.png" alt="Adrian Vales — shocked expression" loading="lazy" width="2630" height="3000" />
+          <figcaption>shock // contact</figcaption>
+        </figure>
+        <figure class="expr" style="margin:0;">
+          <img src="assets/characters/adrian-sad.png" alt="Adrian Vales — distressed expression" loading="lazy" width="2630" height="3000" />
+          <figcaption>distressed // overload</figcaption>
+        </figure>
+        <figure class="expr" style="margin:0;">
+          <img src="assets/characters/adrian-shocker-sweat.png" alt="Adrian Vales — panicked expression" loading="lazy" width="2630" height="3000" />
+          <figcaption>panic // system alert</figcaption>
+        </figure>
+      </div>
+    </div>
+  </main>
+
+  <footer class="foot" id="download" style="padding-top: 3rem;">
+    <p class="foot__fine">HELLO? TRANSMISSION LOST &middot; 喂？信號丟失 &middot; a narrative puzzle game</p>
+  </footer>
+
+  <!-- Lightbox for expression portraits -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" id="lightboxClose" type="button" aria-label="Close">close [x]</button>
+    <img class="lightbox__img" id="lightboxImg" src="" alt="" />
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.querySelectorAll(".expr img, .char-portrait img").forEach((img) => {
+      img.addEventListener("click", () => {
+        const lb = document.getElementById("lightbox");
+        const lbImg = document.getElementById("lightboxImg");
+        lbImg.src = img.currentSrc || img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add("lightbox--open");
+        lb.setAttribute("aria-hidden", "false");
+      });
+      img.style.cursor = "zoom-in";
+    });
+  </script>
+</body>
+</html>

@@ -1,40 +1,38 @@
 /* ============================================================
-   TRANSMISSION LOST — site behavior
+   HELLO? TRANSMISSION LOST — site behavior
    Vanilla JS, no dependencies. Honors prefers-reduced-motion.
    ============================================================ */
 
-/* ---- ONE place to set your real links. Change these two values. ---- */
-const ITCH_URL = "https://itch.io/";   // TODO: your itch.io demo page, e.g. https://yourname.itch.io/transmission-lost
+/* ---- ONE place to set your real links. Edit these values. ---- */
+const DOWNLOAD_URL = "https://mega.nz/file/ie5miSzA#BVIot7QVobuyS8MCvfFY6Ge_lMsLiyFClQ0hTVb_nzo"; // PC demo (MEGA)
 const SOCIAL = {
-  discord: "#",                        // TODO: invite link or "" to hide
-  "x / twitter": "#",                  // TODO
-  "press kit": "#",                    // TODO
+  threads: "https://www.threads.com/@looooop_hk",
+  xhs:     "https://www.xiaohongshu.com/user/profile/6565c6e2000000001103ea43",
+  youtube: "https://www.youtube.com/@JCYTprj",
 };
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* Wire every data-itch element to the itch URL in one shot. */
-document.querySelectorAll("[data-itch]").forEach((el) => {
-  el.href = ITCH_URL;
-  el.target = "_blank";
-  el.rel = "noopener";
+/* Wire every download button + social link from the config above. */
+document.querySelectorAll("[data-download]").forEach((el) => {
+  el.href = DOWNLOAD_URL; el.target = "_blank"; el.rel = "noopener";
 });
 document.querySelectorAll("[data-social]").forEach((el) => {
-  const url = SOCIAL[el.textContent.trim()];
-  if (url && url !== "#") { el.href = url; el.target = "_blank"; el.rel = "noopener"; }
+  const url = SOCIAL[el.getAttribute("data-social")];
+  if (url) { el.href = url; el.target = "_blank"; el.rel = "noopener"; }
 });
 
 /* ============================================================
    BOOT SEQUENCE
    ============================================================ */
 const BOOT_LINES = [
-  "TRANSMISSION LOST // bootloader v0.41",
+  "PROJECT CHRONICLE // bootloader v0.41  (est. 197X)",
   "POST .......................... OK",
   "memory check ................. 64K OK",
-  "mounting /dev/signal ......... OK",
+  "mounting /dev/surveillance ... OK",
+  "reactivating prediction core . [ ONLINE ]",
   "decrypting recovered log ..... FAILED",
   "  > integrity 41% :: proceeding anyway",
-  "establishing uplink .......... [ CONNECTED ]",
   "",
   "incoming transmission detected_",
 ];
@@ -49,31 +47,26 @@ function dismissBoot() {
   boot.removeEventListener("click", dismissBoot);
 }
 
+function armDismiss() {
+  bootSkip.style.opacity = "1";
+  window.addEventListener("keydown", dismissBoot, { once: true });
+  boot.addEventListener("click", dismissBoot, { once: true });
+}
+
 function runBoot() {
   if (reduceMotion) {
     bootLog.textContent = BOOT_LINES.join("\n");
-    bootSkip.style.opacity = "1";
-    window.addEventListener("keydown", dismissBoot, { once: true });
-    boot.addEventListener("click", dismissBoot, { once: true });
-    // auto-dismiss after a moment so reduced-motion users are not stuck
+    armDismiss();
     setTimeout(dismissBoot, 1400);
     return;
   }
-
   let i = 0;
-  function typeLine() {
-    if (i >= BOOT_LINES.length) {
-      bootSkip.style.opacity = "1";
-      window.addEventListener("keydown", dismissBoot, { once: true });
-      boot.addEventListener("click", dismissBoot, { once: true });
-      setTimeout(dismissBoot, 1100);  // auto-continue if the visitor does nothing
-      return;
-    }
+  (function typeLine() {
+    if (i >= BOOT_LINES.length) { armDismiss(); setTimeout(dismissBoot, 1100); return; }
     bootLog.textContent += BOOT_LINES[i] + "\n";
     i++;
     setTimeout(typeLine, 130 + Math.floor(i % 3) * 90);
-  }
-  typeLine();
+  })();
 }
 runBoot();
 
@@ -90,49 +83,49 @@ function print(text, cls = "") {
   div.textContent = text;
   out.appendChild(div);
 }
+function scrollToId(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+}
 
 const COMMANDS = {
   help() {
     print("available commands:", "muted");
-    print("  play      open the demo on itch.io");
-    print("  story     read the recovered transmission");
-    print("  features  what is inside the game");
-    print("  stills    view screenshots");
-    print("  whoami    ?");
-    print("  clear     wipe this terminal");
+    print("  download   get the PC demo");
+    print("  watch      play the gameplay video");
+    print("  story      read the recovered log");
+    print("  features   what is inside the game");
+    print("  stills     view screenshots");
+    print("  crew       who made this");
+    print("  whoami     ?");
+    print("  clear      wipe this terminal");
   },
-  play() {
-    print("opening uplink to itch.io ...", "muted");
-    window.open(ITCH_URL, "_blank", "noopener");
-  },
+  download() { print("opening download (MEGA) ...", "muted"); window.open(DOWNLOAD_URL, "_blank", "noopener"); },
+  play()     { this.download(); },
+  watch()    { print("loading footage ...", "muted"); scrollToId("watch"); },
   story()    { print("routing to recovered log ...", "muted"); scrollToId("signal"); },
   features() { print("listing features.txt ...", "muted"); scrollToId("features"); },
   stills()   { print("loading /stills ...", "muted"); scrollToId("gallery"); },
-  whoami()   { print("you are the one who answered. the line remembers you.", "err"); },
+  crew()     {
+    print("team Looooop:", "muted");
+    print("  Cheng Yu Tung (Janet), Xu Huicong, Zhou Yunxin, Huang Zijuan, Zhou Jingyi");
+    print("  supervisors: Hossein Najafi, Rhys Jones", "muted");
+  },
+  whoami()   { print("you are the one who answered. the system was already expecting you.", "err"); },
   clear()    { out.innerHTML = ""; },
-  ls()       { print("signal/  features.txt  stills/  README"); },
+  ls()       { print("signal/  features.txt  footage/  stills/  crew  README"); },
 };
-
-function scrollToId(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
-}
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const raw = input.value.trim();
   input.value = "";
   if (!raw) return;
-  print("guest@transmission:~$ " + raw, "echo");
+  print("guest@chronicle:~$ " + raw, "echo");
   const cmd = raw.toLowerCase().split(/\s+/)[0];
-  if (COMMANDS[cmd]) {
-    COMMANDS[cmd]();
-  } else {
-    print(`command not found: ${cmd}. type 'help'.`, "err");
-  }
+  if (COMMANDS[cmd]) COMMANDS[cmd]();
+  else print(`command not found: ${cmd}. type 'help'.`, "err");
   out.scrollTop = out.scrollHeight;
 });
-
-/* keep focus feel: clicking anywhere in the window focuses input */
 document.getElementById("consoleWindow").addEventListener("click", () => input.focus());
 
 /* ============================================================
