@@ -17,15 +17,14 @@
     /* Big portrait + info side by side — portrait takes 55% */
     .char-profile {
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
       gap: clamp(2rem, 4vw, 4rem);
       align-items: start;
     }
     @media (max-width: 760px) { .char-profile { grid-template-columns: 1fr; } }
 
-    .char-portrait { margin: 0; border: 1px solid var(--green-ghost); overflow: hidden; position: relative; box-shadow: 0 0 60px rgba(69,255,134,0.10); }
+    .char-portrait { margin: 0; border: 1px solid var(--green-ghost); overflow: hidden; box-shadow: 0 0 60px rgba(69,255,134,0.10); }
     .char-portrait img { display: block; width: 100%; height: auto; }
-    .char-portrait::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,0.14) 3px 4px); mix-blend-mode: multiply; }
 
     .char-info { display: flex; flex-direction: column; gap: 1.6rem; }
     .char-label { font-size: 0.75rem; color: var(--green-dim); letter-spacing: 0.08em; margin: 0 0 0.3rem; }
