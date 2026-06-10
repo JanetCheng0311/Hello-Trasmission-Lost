@@ -1,48 +1,31 @@
-# TRANSMISSION LOST — promo site
+# Hello? Transmission Lost — Promo Site
 
-Static promo page for the retro narrative puzzle horror game **Transmission Lost**.
-Plain HTML / CSS / JS, no build step. Served from the root of `main` via GitHub Pages.
+Promotional website for **Hello? Transmission Lost**, a narrative puzzle horror game by team Looooop.
 
-## Live site
-`https://janetcheng0311.github.io/Hello-Trasmission-Lost/` (after Pages is enabled)
+**Live site:** https://janetcheng0311.github.io/Hello-Trasmission-Lost/
 
-## Edit your details (no coding needed)
+## About the game
 
-**1. itch.io + social links** — open `script.js`, edit the block at the very top:
+A narrative puzzle game about humanity, AI prediction, and control. Set in 2030, engineer Adrian Vales discovers an abandoned underground system built to predict the future. Sort surveillance footage, repair the broken network, avoid the anomalies, and uncover the truth.
 
-```js
-const ITCH_URL = "https://yourname.itch.io/transmission-lost";
-const SOCIAL = {
-  discord: "https://discord.gg/...",
-  "x / twitter": "https://x.com/...",
-  "press kit": "https://...",   // or "" to hide
-};
-```
+Free playable demo available for PC.
 
-That single change updates every "play demo" / "download" button and the footer links.
+## Pages
 
-**2. Game name + story + features** — edit the text directly in `index.html`
-(hero title, the `RECOVERED_LOG` story section, and `features.txt`).
+- `index.html` — Main page: hero, story, features, gameplay videos, screenshot gallery, design show booth, terminal console, download
+- `characters.html` — Character profiles: Adrian Vales full-body portrait and story UI expressions
 
-**3. Screenshots** — replace the placeholder images.
-- Drop your real screenshots into an `assets/` folder.
-- In `index.html`, change each gallery `<img src="https://picsum.photos/...">` to e.g. `src="assets/shot-01.png"`.
-- The placeholders use a green CRT filter so stock images look on-theme. If your real
-  screenshots are already green/styled, remove the `filter:` line under `.shot img` in `styles.css`.
+## Tech
 
-**4. Logo** — the title is set in type (`TRANSMISSION LOST` in the hero). If you have a
-logo image, replace the `<h1 class="hero__title">` with an `<img>` pointing at `assets/logo.png`.
+Plain HTML / CSS / JS — no build step, no framework. Deploys directly from the root of `main` via GitHub Pages.
 
-**5. Social share image** — add `assets/og-cover.png` (1200×630) for nice link previews.
+- CRT terminal aesthetic: phosphor green on black, scanlines, glitch effects
+- Responsive: iPhone, iPad, Mac
+- Boot sequence animation, typeable terminal console, image lightbox
+- All animations respect `prefers-reduced-motion`
 
-## Local preview
-Just open `index.html` in a browser, or run any static server:
+## Team Looooop
 
-```bash
-python3 -m http.server 8000
-```
-
-## Accessibility / performance notes
-- Dark, terminal-green theme by design (it is a CRT).
-- All flicker / glitch / typing effects collapse to static under `prefers-reduced-motion`.
-- No external JS or font dependencies; loads instantly.
+Cheng Yu Tung (Janet) · Xu Huicong · Zhou Yunxin · Huang Zijuan · Zhou Jingyi  
+Supervisors: Hossein Najafi · Rhys Jones  
+MSc Innovative Multimedia Entertainment, PolyU Design
