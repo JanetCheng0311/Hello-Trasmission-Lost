@@ -12,92 +12,42 @@
 
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* ---- Characters-page-specific layout ---- */
-    .char-hero {
-      max-width: var(--maxw);
-      margin-inline: auto;
-      padding: clamp(3rem, 8vw, 6rem) clamp(1.1rem, 6vw, 4rem);
-    }
-    .char-hero__back {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      color: var(--green-dim); font-size: 0.85rem; margin-bottom: 2.5rem;
-      transition: color 0.2s;
-    }
-    .char-hero__back:hover { color: var(--green); }
+    .char-page { max-width: var(--maxw); margin-inline: auto; padding: clamp(3rem, 8vw, 6rem) clamp(1.1rem, 6vw, 4rem); }
 
+    /* Big portrait + info side by side — portrait takes 55% */
     .char-profile {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: clamp(2rem, 5vw, 5rem);
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: clamp(2rem, 4vw, 4rem);
       align-items: start;
     }
-    @media (max-width: 760px) {
-      .char-profile { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 760px) { .char-profile { grid-template-columns: 1fr; } }
 
-    .char-portrait {
-      position: relative;
-      border: 1px solid var(--green-ghost);
-      overflow: hidden;
-      box-shadow: 0 0 60px rgba(69,255,134,0.10);
-    }
-    .char-portrait img {
-      display: block; width: 100%; height: auto;
-    }
-    .char-portrait::after {
-      content: ""; position: absolute; inset: 0; pointer-events: none;
-      background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,0.14) 3px 4px);
-      mix-blend-mode: multiply;
-    }
+    .char-portrait { margin: 0; border: 1px solid var(--green-ghost); overflow: hidden; position: relative; box-shadow: 0 0 60px rgba(69,255,134,0.10); }
+    .char-portrait img { display: block; width: 100%; height: auto; }
+    .char-portrait::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,0.14) 3px 4px); mix-blend-mode: multiply; }
 
     .char-info { display: flex; flex-direction: column; gap: 1.6rem; }
-    .char-label { font-size: 0.75rem; color: var(--green-dim); letter-spacing: 0.08em; margin: 0 0 0.25rem; }
-    .char-name { font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 700; margin: 0; letter-spacing: 0.02em; }
-    .char-role { font-size: clamp(0.9rem, 2vw, 1.05rem); color: var(--green-dim); margin: 0; }
+    .char-label { font-size: 0.75rem; color: var(--green-dim); letter-spacing: 0.08em; margin: 0 0 0.3rem; }
+    .char-name { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; margin: 0; }
+    .char-role { font-size: clamp(0.9rem, 1.8vw, 1rem); color: var(--green-dim); margin: 0; }
     .char-bio p { margin: 0 0 1em; color: var(--green-dim); }
     .char-bio p:last-child { margin-bottom: 0; }
     .char-bio strong { color: var(--green); }
-
-    .char-stats {
-      border: 1px solid var(--green-ghost);
-      padding: 1rem 1.2rem;
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem 1.6rem;
-      font-size: 0.8rem;
-    }
+    .char-stats { border: 1px solid var(--green-ghost); padding: 1rem 1.2rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem 1.6rem; font-size: 0.8rem; }
     .char-stats dt { color: var(--green-dim); letter-spacing: 0.05em; margin: 0; }
     .char-stats dd { margin: 0; color: var(--green); }
 
     /* Expression strip */
-    .expressions {
-      max-width: var(--maxw); margin-inline: auto;
-      padding: 0 clamp(1.1rem, 6vw, 4rem) clamp(3rem, 8vw, 6rem);
-    }
+    .expressions { max-width: var(--maxw); margin-inline: auto; padding: 0 clamp(1.1rem, 6vw, 4rem) clamp(3rem, 8vw, 6rem); }
     .expressions__head { font-size: 0.75rem; color: var(--green-dim); letter-spacing: 0.08em; margin: 0 0 1.2rem; }
-    .expressions__grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: clamp(0.6rem, 2vw, 1.2rem);
-    }
-    @media (max-width: 640px) {
-      .expressions__grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    .expr {
-      border: 1px solid var(--green-ghost);
-      overflow: hidden; position: relative;
-      transition: border-color 0.2s;
-    }
+    .expressions__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(0.6rem, 2vw, 1.2rem); }
+    @media (max-width: 640px) { .expressions__grid { grid-template-columns: repeat(2, 1fr); } }
+    .expr { margin: 0; border: 1px solid var(--green-ghost); overflow: hidden; position: relative; transition: border-color 0.2s; }
     .expr:hover { border-color: var(--green-dim); }
     .expr img { display: block; width: 100%; height: auto; cursor: zoom-in; }
-    .expr figcaption {
-      padding: 0.45rem 0.7rem; font-size: 0.72rem;
-      color: var(--green-dim); letter-spacing: 0.04em;
-      border-top: 1px solid var(--green-ghost);
-    }
-    .expr::after {
-      content: ""; position: absolute; inset: 0; pointer-events: none;
-      background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,0.14) 3px 4px);
-      mix-blend-mode: multiply;
-    }
+    .expr figcaption { padding: 0.45rem 0.7rem; font-size: 0.72rem; color: var(--green-dim); letter-spacing: 0.04em; border-top: 1px solid var(--green-ghost); }
+    .expr::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,0.14) 3px 4px); mix-blend-mode: multiply; }
   </style>
 </head>
 <body>
@@ -114,10 +64,6 @@
       <span>HELLO? TRANSMISSION LOST</span>
     </a>
     <nav class="nav__links" aria-label="Primary">
-      
-      
-      
-      
       <a href="index.html">home</a>
       <a href="characters.html" aria-current="page">characters</a>
       <a class="nav__cta" href="index.html#download" data-download>download</a>
@@ -125,11 +71,9 @@
   </header>
 
   <main>
-    <div class="char-hero">
-      <a class="char-hero__back" href="index.html">&larr; back to main</a>
-
+    <div class="char-page">
       <div class="char-profile">
-        <figure class="char-portrait" style="margin:0;">
+        <figure class="char-portrait">
           <img src="assets/characters/adrian-fullbody.jpg" alt="Adrian Vales — full body portrait" width="1280" height="1280" fetchpriority="high" />
         </figure>
 
@@ -139,22 +83,16 @@
             <h1 class="char-name">Adrian Vales</h1>
             <p class="char-role">network engineer &middot; system operator</p>
           </div>
-
           <div class="char-bio">
             <p>In 2030, <strong>Adrian Vales</strong> is the engineer pulled into the reactivated underground prediction system. He is practical, methodical, and used to working alone inside dark monitoring rooms — exactly the kind of person the system was built to study.</p>
             <p>When the recordings begin to loop and the timelines fracture, Adrian becomes both investigator and subject. The records he uncovers reveal more about his own behavior than about anyone else's.</p>
             <p>His expressions are the system's primary readout. What he shows on camera determines what the prediction engine learns next.</p>
           </div>
-
           <dl class="char-stats">
-            <dt>STATUS</dt>
-            <dd>operative // active</dd>
-            <dt>CLEARANCE</dt>
-            <dd>level 2 // maintenance</dd>
-            <dt>DESIGNATION</dt>
-            <dd>subject_A</dd>
-            <dt>INTEGRITY</dt>
-            <dd>41%</dd>
+            <dt>STATUS</dt><dd>operative // active</dd>
+            <dt>CLEARANCE</dt><dd>level 2 // maintenance</dd>
+            <dt>DESIGNATION</dt><dd>subject_A</dd>
+            <dt>INTEGRITY</dt><dd>41%</dd>
           </dl>
         </div>
       </div>
@@ -164,31 +102,30 @@
     <div class="expressions">
       <p class="expressions__head">// STORY UI EXPRESSIONS — recorded by the system</p>
       <div class="expressions__grid">
-        <figure class="expr" style="margin:0;">
-          <img src="assets/characters/adrian-normal.png" alt="Adrian Vales — neutral expression" loading="lazy" width="2630" height="3000" />
+        <figure class="expr">
+          <img src="assets/characters/adrian-normal.png" alt="Adrian Vales — neutral" loading="lazy" width="2630" height="3000" />
           <figcaption>neutral // calm</figcaption>
         </figure>
-        <figure class="expr" style="margin:0;">
-          <img src="assets/characters/adrian-shock.png" alt="Adrian Vales — shocked expression" loading="lazy" width="2630" height="3000" />
+        <figure class="expr">
+          <img src="assets/characters/adrian-shock.png" alt="Adrian Vales — shocked" loading="lazy" width="2630" height="3000" />
           <figcaption>shock // contact</figcaption>
         </figure>
-        <figure class="expr" style="margin:0;">
-          <img src="assets/characters/adrian-sad.png" alt="Adrian Vales — distressed expression" loading="lazy" width="2630" height="3000" />
+        <figure class="expr">
+          <img src="assets/characters/adrian-sad.png" alt="Adrian Vales — distressed" loading="lazy" width="2630" height="3000" />
           <figcaption>distressed // overload</figcaption>
         </figure>
-        <figure class="expr" style="margin:0;">
-          <img src="assets/characters/adrian-shocker-sweat.png" alt="Adrian Vales — panicked expression" loading="lazy" width="2630" height="3000" />
+        <figure class="expr">
+          <img src="assets/characters/adrian-shocker-sweat.png" alt="Adrian Vales — panicked" loading="lazy" width="2630" height="3000" />
           <figcaption>panic // system alert</figcaption>
         </figure>
       </div>
     </div>
   </main>
 
-  <footer class="foot" id="download" style="padding-top: 3rem;">
+  <footer class="foot" style="padding-top: 3rem;">
     <p class="foot__fine">HELLO? TRANSMISSION LOST &middot; 喂？信號丟失 &middot; a narrative puzzle game</p>
   </footer>
 
-  <!-- Lightbox for expression portraits -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <button class="lightbox__close" id="lightboxClose" type="button" aria-label="Close">close [x]</button>
     <img class="lightbox__img" id="lightboxImg" src="" alt="" />
