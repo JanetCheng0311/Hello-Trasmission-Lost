@@ -54,8 +54,8 @@
     /* Name glitch: flickers to CHRONICLE and back */
     .char-name--glitch { position: relative; }
     .char-name--glitch.glitching {
-      color: var(--red);
-      text-shadow: 2px 0 var(--green), -2px 0 #4dc8ff, 0 0 12px rgba(255,77,94,0.5);
+      color: var(--green);
+      text-shadow: 2px 0 rgba(69,255,134,0.55), -2px 0 rgba(69,255,134,0.3), 0 0 14px rgba(69,255,134,0.5);
       animation: nameJitter 0.09s steps(2) infinite;
     }
     @keyframes nameJitter {
@@ -175,7 +175,7 @@
           <div>
             <p class="char-label">// OPERATIVE FILE — RECORD CORRUPTED</p>
             <h1 class="char-name char-name--glitch" id="irinaName">Irina</h1>
-            <p class="char-role">narrator &middot; ???</p>
+            <p class="char-role">AI researcher &middot; narrator</p>
           </div>
           <p class="spoiler-hint">// CLASSIFIED — click a line to decrypt</p>
           <div class="char-bio">
@@ -234,7 +234,7 @@
           irinaName.textContent = "Irina";
           irinaName.classList.remove("glitching");
         }, 420);
-      }, 3600);
+      }, 9000);
     }
   </script>
 </body>
