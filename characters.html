@@ -47,6 +47,40 @@
     .expr img { display: block; width: 100%; height: auto; cursor: zoom-in; }
     .expr figcaption { padding: 0.45rem 0.7rem; font-size: 0.72rem; color: var(--green-dim); letter-spacing: 0.04em; border-top: 1px solid var(--green-ghost); }
     .expr::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,0.14) 3px 4px); mix-blend-mode: multiply; }
+
+    /* ---- Operative file 02: classified section ---- */
+    .char-page--classified { border-top: 1px solid var(--green-ghost); margin-top: 1rem; }
+
+    /* Name glitch: flickers to CHRONICLE and back */
+    .char-name--glitch { position: relative; }
+    .char-name--glitch.glitching {
+      color: var(--red);
+      text-shadow: 2px 0 var(--green), -2px 0 #4dc8ff, 0 0 12px rgba(255,77,94,0.5);
+      animation: nameJitter 0.09s steps(2) infinite;
+    }
+    @keyframes nameJitter {
+      0% { transform: translate(0, 0) skewX(0deg); }
+      50% { transform: translate(-2px, 1px) skewX(-2deg); }
+      100% { transform: translate(2px, -1px) skewX(1deg); }
+    }
+    @media (prefers-reduced-motion: reduce) { .char-name--glitch.glitching { animation: none; } }
+
+    /* Spoiler: redacted until clicked */
+    .spoiler-hint { font-size: 0.72rem; color: var(--red); letter-spacing: 0.08em; margin: 0; opacity: 0.8; }
+    .spoiler {
+      background: var(--green-ghost); color: transparent; text-shadow: none;
+      border-radius: 2px; cursor: pointer; user-select: none;
+      transition: background 0.25s ease, color 0.25s ease;
+      box-decoration-break: clone; -webkit-box-decoration-break: clone;
+      padding: 0.05em 0.25em;
+    }
+    .spoiler strong { color: transparent; transition: color 0.25s ease; }
+    .spoiler:hover, .spoiler:focus-visible { background: #17522a; outline: none; }
+    .spoiler.spoiler--open {
+      background: transparent; color: inherit; cursor: text; user-select: text;
+      text-shadow: 0 0 6px rgba(69, 255, 134, 0.22); padding: 0;
+    }
+    .spoiler.spoiler--open strong { color: var(--green); }
   </style>
 </head>
 <body>
@@ -129,6 +163,34 @@
         </figure>
       </div>
     </div>
+
+    <!-- ============ OPERATIVE FILE 02 — IRINA (classified) ============ -->
+    <div class="char-page char-page--classified">
+      <div class="char-profile">
+        <figure class="char-portrait">
+          <img src="assets/characters/irina-narrator.png" alt="Irina — silhouette recovered from the story records" width="2630" height="3000" loading="lazy" />
+        </figure>
+
+        <div class="char-info">
+          <div>
+            <p class="char-label">// OPERATIVE FILE — RECORD CORRUPTED</p>
+            <h1 class="char-name char-name--glitch" id="irinaName">Irina</h1>
+            <p class="char-role">narrator &middot; ???</p>
+          </div>
+          <p class="spoiler-hint">// CLASSIFIED — click a line to decrypt</p>
+          <div class="char-bio">
+            <p><span class="spoiler" tabindex="0"><strong>Irina</strong> is the creator of CHRONICLE — a predictive surveillance network built by the government in the 1970s, roughly fifty years before the events of the game, and deployed deep beneath the city.</span></p>
+            <p><span class="spoiler" tabindex="0">The system taps into the city's data sources and runs probabilistic models over the next 0.5–3 hours, visualising the most likely future as "prediction videos" for its operators to review.</span></p>
+            <p><span class="spoiler" tabindex="0">Years into the project, an operator died suddenly at the console. After the accident, CHRONICLE's predictions began to spiral out of control and the project was shut down. Irina is already dead — the voice guiding you through the records is all that remains of her.</span></p>
+          </div>
+          <dl class="char-stats">
+            <dt>GENDER</dt><dd>female</dd>
+            <dt>HEIGHT</dt><dd>???</dd>
+            <dt>WEIGHT</dt><dd>???</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
   </main>
 
   <footer class="foot" style="padding-top: 3rem;">
@@ -153,6 +215,27 @@
       });
       img.style.cursor = "zoom-in";
     });
+
+    /* Spoilers: click (or Enter) to decrypt a line */
+    document.querySelectorAll(".spoiler").forEach((sp) => {
+      const reveal = () => sp.classList.add("spoiler--open");
+      sp.addEventListener("click", reveal);
+      sp.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); reveal(); } });
+    });
+
+    /* Irina's name: glitches into CHRONICLE for a moment, then settles back */
+    const irinaName = document.getElementById("irinaName");
+    const motionOK = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (irinaName && motionOK) {
+      setInterval(() => {
+        irinaName.textContent = "Chronicle";
+        irinaName.classList.add("glitching");
+        setTimeout(() => {
+          irinaName.textContent = "Irina";
+          irinaName.classList.remove("glitching");
+        }, 420);
+      }, 3600);
+    }
   </script>
 </body>
 </html>
