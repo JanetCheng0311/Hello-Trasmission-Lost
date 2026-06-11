@@ -80,6 +80,35 @@ a { color: inherit; text-decoration: none; }
 .nav__cta { color: var(--green); border: 1px solid var(--green); padding: 0.35rem 0.85rem; white-space: nowrap; }
 .nav__cta:hover { background: var(--green); color: var(--bg); text-shadow: none; }
 
+/* Hamburger button — hidden on desktop, shown on phones */
+.nav__menu {
+  display: none; align-items: center; gap: 0.45rem;
+  background: none; border: 1px solid var(--green); color: var(--green);
+  font-family: var(--mono); font-size: 0.8rem; padding: 0.35rem 0.8rem;
+  cursor: pointer; white-space: nowrap;
+}
+.nav__menu:hover { background: var(--green); color: var(--bg); text-shadow: none; }
+
+/* Slide-out menu drawer (left side) */
+.drawer { position: fixed; inset: 0; z-index: 90; visibility: hidden; transition: visibility 0.25s; }
+.drawer::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.65); opacity: 0; transition: opacity 0.25s; }
+.drawer__panel {
+  position: absolute; top: 0; bottom: 0; left: 0; width: min(72vw, 280px);
+  background: var(--bg-2); border-right: 1px solid var(--green-ghost);
+  padding: 1.5rem 1.4rem; display: flex; flex-direction: column; gap: 0;
+  transform: translateX(-100%); transition: transform 0.25s ease;
+  box-shadow: 0 0 60px rgba(0,0,0,0.8);
+}
+.drawer--open { visibility: visible; }
+.drawer--open::before { opacity: 1; }
+.drawer--open .drawer__panel { transform: translateX(0); }
+.drawer__head { font-size: 0.72rem; color: var(--green-dim); letter-spacing: 0.08em; margin: 0 0 1.2rem; }
+.drawer__panel a { display: block; color: var(--green-dim); font-size: 1rem; padding: 0.85rem 0.2rem; border-bottom: 1px solid var(--green-ghost); transition: color 0.2s; }
+.drawer__panel a:hover, .drawer__panel a[aria-current="page"] { color: var(--green); }
+.drawer__close { margin-top: auto; background: none; border: 1px solid var(--green-ghost); color: var(--green-dim); font-family: var(--mono); font-size: 0.8rem; padding: 0.6rem; cursor: pointer; }
+.drawer__close:hover { color: var(--green); border-color: var(--green); }
+@media (prefers-reduced-motion: reduce) { .drawer, .drawer::before, .drawer__panel { transition: none; } }
+
 /* ---------- Shared layout ---------- */
 section { padding: clamp(3.5rem, 9vw, 7rem) clamp(1.1rem, 6vw, 4rem); }
 .section-head { font-size: clamp(1.25rem, 3vw, 2rem); font-weight: 700; letter-spacing: 0.02em; margin: 0 auto 2.2rem; max-width: var(--maxw); }
@@ -242,9 +271,10 @@ section { padding: clamp(3.5rem, 9vw, 7rem) clamp(1.1rem, 6vw, 4rem); }
   .features__list { grid-template-columns: 1fr; }
 }
 
-/* Collapse nav links to brand + CTA on phones */
+/* On phones: swap inline nav links for the hamburger menu */
 @media (max-width: 640px) {
-  .nav__links a:not(.nav__cta) { display: none; }
+  .nav__links { display: none; }
+  .nav__menu { display: inline-flex; }
   .nav__brand span { font-size: 0.7rem; }
 }
 

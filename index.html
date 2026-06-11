@@ -43,7 +43,19 @@
       <a href="characters.html">characters</a>
       <a class="nav__cta" href="#download" data-download>download</a>
     </nav>
+    <button class="nav__menu" id="navMenuBtn" type="button" aria-expanded="false" aria-controls="navDrawer">&#9776; menu</button>
   </header>
+
+  <!-- Slide-out menu (phones) -->
+  <div class="drawer" id="navDrawer" aria-hidden="true">
+    <nav class="drawer__panel" aria-label="Menu">
+      <p class="drawer__head">// MENU</p>
+      <a href="index.html" aria-current="page">home</a>
+      <a href="characters.html">characters</a>
+      <a href="#download" data-download>download the demo</a>
+      <button class="drawer__close" id="navDrawerClose" type="button">close [x]</button>
+    </nav>
+  </div>
 
   <main id="top">
     <!-- ============ HERO ============ -->

@@ -23,6 +23,24 @@ document.querySelectorAll("[data-social]").forEach((el) => {
 });
 
 /* ============================================================
+   MOBILE MENU DRAWER (works on every page)
+   ============================================================ */
+const menuBtn = document.getElementById("navMenuBtn");
+const navDrawer = document.getElementById("navDrawer");
+if (menuBtn && navDrawer) {
+  const setMenu = (open) => {
+    navDrawer.classList.toggle("drawer--open", open);
+    navDrawer.setAttribute("aria-hidden", String(!open));
+    menuBtn.setAttribute("aria-expanded", String(open));
+  };
+  menuBtn.addEventListener("click", () => setMenu(!navDrawer.classList.contains("drawer--open")));
+  navDrawer.addEventListener("click", (e) => {
+    if (e.target === navDrawer || e.target.closest("a") || e.target.closest(".drawer__close")) setMenu(false);
+  });
+  window.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
+}
+
+/* ============================================================
    BOOT SEQUENCE
    ============================================================ */
 const BOOT_LINES = [
@@ -68,7 +86,7 @@ function runBoot() {
     setTimeout(typeLine, 130 + Math.floor(i % 3) * 90);
   })();
 }
-runBoot();
+if (boot && bootLog && bootSkip) runBoot();
 
 /* ============================================================
    TYPEABLE CONSOLE
@@ -115,18 +133,20 @@ const COMMANDS = {
   ls()       { print("signal/  features.txt  footage/  stills/  crew  README"); },
 };
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const raw = input.value.trim();
-  input.value = "";
-  if (!raw) return;
-  print("guest@chronicle:~$ " + raw, "echo");
-  const cmd = raw.toLowerCase().split(/\s+/)[0];
-  if (COMMANDS[cmd]) COMMANDS[cmd]();
-  else print(`command not found: ${cmd}. type 'help'.`, "err");
-  out.scrollTop = out.scrollHeight;
-});
-document.getElementById("consoleWindow").addEventListener("click", () => input.focus());
+if (form && input && out) {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const raw = input.value.trim();
+    input.value = "";
+    if (!raw) return;
+    print("guest@chronicle:~$ " + raw, "echo");
+    const cmd = raw.toLowerCase().split(/\s+/)[0];
+    if (COMMANDS[cmd]) COMMANDS[cmd]();
+    else print(`command not found: ${cmd}. type 'help'.`, "err");
+    out.scrollTop = out.scrollHeight;
+  });
+  document.getElementById("consoleWindow").addEventListener("click", () => input.focus());
+}
 
 /* ============================================================
    GALLERY LIGHTBOX
@@ -135,18 +155,20 @@ const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightboxImg");
 const lightboxClose = document.getElementById("lightboxClose");
 
-document.querySelectorAll(".shot img").forEach((img) => {
-  img.addEventListener("click", () => {
-    lightboxImg.src = img.currentSrc || img.src;
-    lightboxImg.alt = img.alt;
-    lightbox.classList.add("lightbox--open");
-    lightbox.setAttribute("aria-hidden", "false");
+if (lightbox && lightboxImg && lightboxClose) {
+  document.querySelectorAll(".shot img").forEach((img) => {
+    img.addEventListener("click", () => {
+      lightboxImg.src = img.currentSrc || img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add("lightbox--open");
+      lightbox.setAttribute("aria-hidden", "false");
+    });
   });
-});
-function closeLightbox() {
-  lightbox.classList.remove("lightbox--open");
-  lightbox.setAttribute("aria-hidden", "true");
+  const closeLightbox = () => {
+    lightbox.classList.remove("lightbox--open");
+    lightbox.setAttribute("aria-hidden", "true");
+  };
+  lightboxClose.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+  window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
 }
-lightboxClose.addEventListener("click", closeLightbox);
-lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
-window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
