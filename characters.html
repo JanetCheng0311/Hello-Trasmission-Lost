@@ -81,6 +81,14 @@
       text-shadow: 0 0 6px rgba(69, 255, 134, 0.22); padding: 0;
     }
     .spoiler.spoiler--open strong { color: var(--green); }
+
+    /* Design sheet: blurred until clicked */
+    .char-sheet { margin: clamp(2rem, 4vw, 3rem) 0 0; border: 1px solid var(--green-ghost); overflow: hidden; cursor: pointer; }
+    .char-sheet img { display: block; width: 100%; height: auto; filter: blur(26px) saturate(0.6); transform: scale(1.05); transition: filter 0.45s ease, transform 0.45s ease; }
+    .char-sheet figcaption { padding: 0.55rem 0.8rem; font-size: 0.72rem; color: var(--red); letter-spacing: 0.06em; border-top: 1px solid var(--green-ghost); opacity: 0.85; }
+    .char-sheet.sheet--open img { filter: none; transform: none; cursor: zoom-in; }
+    .char-sheet.sheet--open figcaption { color: var(--green-dim); }
+    @media (prefers-reduced-motion: reduce) { .char-sheet img { transition: none; } }
   </style>
 </head>
 <body>
@@ -190,6 +198,11 @@
           </dl>
         </div>
       </div>
+
+      <figure class="char-sheet" id="irinaSheet">
+        <img src="assets/characters/irina-sheet.jpg" alt="Irina — character design sheet" width="1920" height="1440" loading="lazy" />
+        <figcaption>// PERSONNEL RECORD — click to decrypt</figcaption>
+      </figure>
     </div>
   </main>
 
@@ -222,6 +235,25 @@
       sp.addEventListener("click", reveal);
       sp.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); reveal(); } });
     });
+
+    /* Design sheet: first click decrypts, second click opens lightbox */
+    const sheet = document.getElementById("irinaSheet");
+    if (sheet) {
+      sheet.addEventListener("click", () => {
+        if (!sheet.classList.contains("sheet--open")) {
+          sheet.classList.add("sheet--open");
+          sheet.querySelector("figcaption").textContent = "// PERSONNEL RECORD — Irina, design file";
+          return;
+        }
+        const lb = document.getElementById("lightbox");
+        const lbImg = document.getElementById("lightboxImg");
+        const img = sheet.querySelector("img");
+        lbImg.src = img.currentSrc || img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add("lightbox--open");
+        lb.setAttribute("aria-hidden", "false");
+      });
+    }
 
     /* Irina's name: glitches into CHRONICLE for a moment, then settles back */
     const irinaName = document.getElementById("irinaName");
