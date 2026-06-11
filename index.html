@@ -16,7 +16,6 @@
   <meta property="og:image" content="assets/og-cover.jpg" />
   <meta name="theme-color" content="#040806" />
 
-  <link rel="preconnect" href="https://www.youtube-nocookie.com" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -41,6 +40,7 @@
     </a>
     <nav class="nav__links" aria-label="Primary">
       <a href="characters.html">characters</a>
+      <a href="merch.html">merch</a>
       <a class="nav__cta" href="#download" data-download>download</a>
     </nav>
     <button class="nav__menu" id="navMenuBtn" type="button" aria-expanded="false" aria-controls="navDrawer">&#9776; menu</button>
@@ -52,6 +52,7 @@
       <p class="drawer__head">// MENU</p>
       <a href="index.html" aria-current="page">home</a>
       <a href="characters.html">characters</a>
+      <a href="merch.html">merch</a>
       <a href="#download" data-download>download the demo</a>
       <button class="drawer__close" id="navDrawerClose" type="button">close [x]</button>
     </nav>
@@ -70,7 +71,7 @@
           <a class="btn btn--solid" href="#download" data-download>
             <span class="btn__prompt">&gt;</span> download the demo
           </a>
-          <a class="btn btn--ghost" href="#watch">watch gameplay</a>
+          <a class="btn btn--ghost" href="characters.html">meet the cast</a>
         </div>
         <p class="hero__meta">PC &middot; free playable demo &middot; a Looooop game</p>
       </div>
@@ -129,28 +130,6 @@
       </ul>
     </section>
 
-    <!-- ============ WATCH (video) ============ -->
-    <!-- TODO(video): gameplay video is a placeholder the team will swap (youtu.be/da_cmh6NPeA).
-         Tutorial video (AIn7Bz7JTmE) was pulled from the official design-show page. -->
-    <section class="watch" id="watch">
-      <h2 class="section-head"><span class="section-head__cmd">&gt; play</span> /footage</h2>
-      <div class="watch__grid">
-        <figure class="video">
-          <div class="video__frame">
-            <iframe src="https://www.youtube-nocookie.com/embed/da_cmh6NPeA" title="Hello? Transmission Lost gameplay video"
-              loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <figcaption>gameplay // first look</figcaption>
-        </figure>
-        <figure class="video">
-          <div class="video__frame">
-            <iframe src="https://www.youtube-nocookie.com/embed/AIn7Bz7JTmE" title="Hello? Transmission Lost tutorial"
-              loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <figcaption>tutorial // how to play</figcaption>
-        </figure>
-      </div>
-    </section>
 
     <!-- ============ GALLERY (each still shown at its own 16:9 ratio, never cropped to square) ============ -->
     <section class="gallery" id="gallery">

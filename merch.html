@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Merch // Hello? Transmission Lost</title>
+  <meta name="description" content="Collectibles and merch for Hello? Transmission Lost — plush dolls, acrylic stands, and bookmarks from team Looooop." />
+
+  <link rel="icon" type="image/png" href="assets/favicon-64.png" />
+  <link rel="apple-touch-icon" href="assets/icon-180.png" />
+  <meta name="theme-color" content="#040806" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .merch-page { max-width: var(--maxw); margin-inline: auto; padding: clamp(2.5rem, 7vw, 5rem) clamp(1.1rem, 6vw, 4rem); }
+    .merch-intro { margin: 0 0 2.5rem; }
+    .merch-intro__label { font-size: 0.75rem; color: var(--green-dim); letter-spacing: 0.08em; margin: 0 0 0.4rem; }
+    .merch-intro h1 { font-size: clamp(1.8rem, 5vw, 3rem); margin: 0 0 0.8rem; }
+    .merch-intro p { color: var(--green-dim); max-width: 60ch; margin: 0; }
+
+    .merch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2.5vw, 1.8rem); }
+    @media (max-width: 860px) { .merch-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .merch-grid { grid-template-columns: 1fr; } }
+
+    .merch-card { border: 1px solid var(--green-ghost); background: var(--bg-2); display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s; }
+    .merch-card:hover { border-color: var(--green-dim); transform: translateY(-2px); }
+    .merch-card__media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-bottom: 1px solid var(--green-ghost); }
+    .merch-card__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .merch-card__body { padding: 1rem 1.1rem 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+    .merch-card__name { font-size: 1.05rem; font-weight: 700; margin: 0; }
+    .merch-card__sub { font-size: 0.78rem; color: var(--green-dim); margin: 0; letter-spacing: 0.02em; }
+    .merch-card__desc { font-size: 0.85rem; color: var(--green-dim); margin: 0.2rem 0 0; flex: 1; }
+    .merch-card__price { margin: 0.6rem 0 0; font-size: 0.9rem; color: var(--green); border-top: 1px solid var(--green-ghost); padding-top: 0.7rem; }
+    .merch-card__tag { display: inline-block; font-size: 0.68rem; letter-spacing: 0.06em; padding: 0.2rem 0.5rem; border: 1px solid var(--green-ghost); color: var(--green-dim); margin-top: 0.5rem; align-self: flex-start; }
+    .merch-card__tag--free { color: var(--green); border-color: var(--green); }
+
+    /* Bookmark: protected 2D design — CRT overlay + download blocker */
+    .merch-card__media--protected { background: #02110a center/cover no-repeat; user-select: none; }
+    .merch-card__shield { position: absolute; inset: 0; z-index: 3; cursor: not-allowed; }
+    .merch-card__crt { position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background:
+        repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,0.22) 3px 4px),
+        radial-gradient(120% 120% at 50% 50%, transparent 60%, rgba(0,0,0,0.5) 100%);
+      mix-blend-mode: multiply; }
+    .merch-card__crt::after { content: ""; position: absolute; inset: 0; background: rgba(69,255,134,0.05); animation: bmFlicker 5s steps(8) infinite; }
+    @keyframes bmFlicker { 0%,100% { opacity: 0.2; } 50% { opacity: 0.05; } 73% { opacity: 0.3; } }
+    @media (prefers-reduced-motion: reduce) { .merch-card__crt::after { animation: none; } }
+    .merch-card__watermark { position: absolute; bottom: 6px; right: 8px; z-index: 2; font-size: 0.6rem; color: rgba(69,255,134,0.55); letter-spacing: 0.06em; pointer-events: none; }
+
+    .merch-contact { margin-top: 3rem; border: 1px solid var(--green-ghost); padding: 1.3rem 1.5rem; background: var(--bg-2); }
+    .merch-contact h2 { font-size: 1rem; margin: 0 0 0.5rem; }
+    .merch-contact p { color: var(--green-dim); margin: 0 0 0.8rem; font-size: 0.9rem; }
+    .merch-contact a { color: var(--green); border-bottom: 1px solid var(--green-ghost); }
+    .merch-contact a:hover { border-color: var(--green); }
+  </style>
+</head>
+<body>
+  <div class="crt" aria-hidden="true">
+    <div class="crt__scanlines"></div>
+    <div class="crt__vignette"></div>
+    <div class="crt__flicker"></div>
+  </div>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="index.html">
+      <img class="nav__eye" src="assets/logo-eye.png" alt="" width="114" height="114" />
+      <span>HELLO? TRANSMISSION LOST</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="index.html">home</a>
+      <a href="characters.html">characters</a>
+      <a href="merch.html" aria-current="page">merch</a>
+      <a class="nav__cta" href="index.html#download" data-download>download</a>
+    </nav>
+    <button class="nav__menu" id="navMenuBtn" type="button" aria-expanded="false" aria-controls="navDrawer">&#9776; menu</button>
+  </header>
+
+  <!-- Slide-out menu (phones) -->
+  <div class="drawer" id="navDrawer" aria-hidden="true">
+    <nav class="drawer__panel" aria-label="Menu">
+      <p class="drawer__head">// MENU</p>
+      <a href="index.html">home</a>
+      <a href="characters.html">characters</a>
+      <a href="merch.html" aria-current="page">merch</a>
+      <a href="index.html#download" data-download>download the demo</a>
+      <button class="drawer__close" id="navDrawerClose" type="button">close [x]</button>
+    </nav>
+  </div>
+
+  <main>
+    <div class="merch-page">
+      <div class="merch-intro">
+        <p class="merch-intro__label">// SUPPLY DROP</p>
+        <h1>Merch &amp; collectibles</h1>
+        <p>Physical goods from the Looooop booth. Plush and acrylic pieces are made to order — message us for pricing. The bookmark is free to collect at our design show booth while stock lasts.</p>
+      </div>
+
+      <div class="merch-grid">
+        <!-- 老鼠干 doll -->
+        <article class="merch-card">
+          <div class="merch-card__media">
+            <img src="assets/merch/adrian-acrylic.jpg" alt="老鼠干 Rat Jerky handmade plush doll" style="object-position: 86% 28%;" loading="lazy" />
+          </div>
+          <div class="merch-card__body">
+            <h3 class="merch-card__name">老鼠干 &middot; "Rat Jerky"</h3>
+            <p class="merch-card__sub">handmade plush doll</p>
+            <p class="merch-card__desc">A one-of-a-kind hand-sewn plush — soft, slightly cursed, and printed from the in-game art. Limited handmade run.</p>
+            <p class="merch-card__price">price: ask us</p>
+            <span class="merch-card__tag">made to order &middot; contact</span>
+          </div>
+        </article>
+
+        <!-- Adrian acrylic stand -->
+        <article class="merch-card">
+          <div class="merch-card__media">
+            <img src="assets/merch/adrian-acrylic.jpg" alt="Adrian Vales sitting acrylic stand" style="object-position: 16% 72%;" loading="lazy" />
+          </div>
+          <div class="merch-card__body">
+            <h3 class="merch-card__name">Adrian Vales</h3>
+            <p class="merch-card__sub">sitting acrylic stand</p>
+            <p class="merch-card__desc">A perched acrylic figure of Adrian that sits on the edge of your shelf or monitor. Full-colour, double-sided print.</p>
+            <p class="merch-card__price">price: ask us</p>
+            <span class="merch-card__tag">made to order &middot; contact</span>
+          </div>
+        </article>
+
+        <!-- Bookmark (protected 2D design) -->
+        <article class="merch-card">
+          <div class="merch-card__media merch-card__media--protected" id="bookmarkMedia">
+            <div class="merch-card__crt"></div>
+            <span class="merch-card__watermark">© Looooop</span>
+            <div class="merch-card__shield" oncontextmenu="return false" aria-hidden="true"></div>
+          </div>
+          <div class="merch-card__body">
+            <h3 class="merch-card__name">Glitch bookmark</h3>
+            <p class="merch-card__sub">double-sided print &middot; Adrian + chibi</p>
+            <p class="merch-card__desc">Our original 2D bookmark design — Adrian on one side, a chibi on the other, with the CRT signal motif.</p>
+            <p class="merch-card__price">FREE to collect</p>
+            <span class="merch-card__tag merch-card__tag--free">pick up at our booth</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="merch-contact">
+        <h2>// want a piece?</h2>
+        <p>The plush and acrylic stand are handmade to order. Message us on socials and we'll sort out pricing and shipping.</p>
+        <p>
+          <a href="#" data-social="threads">Threads</a>
+          &nbsp;&middot;&nbsp;
+          <a href="#" data-social="xhs">小红书 / XHS</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="foot" style="padding-top: 3rem;">
+    <p class="foot__fine">HELLO? TRANSMISSION LOST &middot; 喂？信號丟失 &middot; a narrative puzzle game</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    /* Bookmark is the team's 2D merch design — load it as a CSS background (not a
+       saveable <img>) and block right-click / drag to deter casual downloads. */
+    (function () {
+      const media = document.getElementById("bookmarkMedia");
+      if (!media) return;
+      media.style.backgroundImage = 'url("assets/merch/bookmark.png")';
+      media.addEventListener("contextmenu", (e) => e.preventDefault());
+      media.addEventListener("dragstart", (e) => e.preventDefault());
+    })();
+  </script>
+</body>
+</html>
