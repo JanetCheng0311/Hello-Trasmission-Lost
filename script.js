@@ -4,7 +4,7 @@
    ============================================================ */
 
 /* ---- ONE place to set your real links. Edit these values. ---- */
-const DOWNLOAD_URL = "https://mega.nz/file/ie5miSzA#BVIot7QVobuyS8MCvfFY6Ge_lMsLiyFClQ0hTVb_nzo"; // PC demo (MEGA)
+const DOWNLOAD_URL = "https://hellotransimissionlost.itch.io/hellotransmissionlost"; // PC demo (MEGA)
 const SOCIAL = {
   threads: "https://www.threads.com/@looooop_hk",
   xhs:     "https://www.xiaohongshu.com/user/profile/6565c6e2000000001103ea43",
